@@ -1,7 +1,7 @@
 require 'rubygems'
-require 'spork'
+#require 'spork'
 
-Spork.prefork do
+#Spork.prefork do
     # This file is copied to spec/ when you run 'rails generate rspec:install'
     ENV["RAILS_ENV"] ||= 'test'
     require File.expand_path("../../config/environment", __FILE__)
@@ -29,6 +29,6 @@ Spork.prefork do
       # instead of true.
       config.use_transactional_fixtures = true
       
-      ActiveSupport::Dependencies.clear
+#      ActiveSupport::Dependencies.clear
     end
-end
+#end
