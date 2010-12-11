@@ -9,3 +9,9 @@ Autotest.add_hook :reset do |at|
   }
 end
 
+Autotest.add_hook :initialize do |at|
+  at.add_exception(/\.sqlite/)
+  at.add_exception(/^\.git/)
+  at.add_exception(/\.log/)
+end
+
