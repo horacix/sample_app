@@ -51,6 +51,17 @@ describe UsersController do
         response.should have_selector("a", :href => "/users?page=2",
                                            :content => "Next")
       end
+
+      it "should not display delete link for non-admins" do
+        get :index
+        response.should_not have_selector("a", :content => "delete")
+      end
+
+      it "should display delete link for admins" do
+        @user.toggle!(:admin)
+        get :index
+        response.should have_selector("a", :content => "delete")
+      end
     end
   end
 
@@ -83,6 +94,13 @@ describe UsersController do
     it "should have a password confirmation field" do
       get :new
       response.should have_selector("input[name='user[password_confirmation]'][type='password']")
+    end
+
+    it "should redirect to root if singed in" do
+      user = Factory(:user)
+      test_sign_in(user)
+      get :new
+      response.should redirect_to(root_path)
     end
   end
 
@@ -316,8 +334,8 @@ describe UsersController do
     describe "as an admin user" do
 
       before(:each) do
-        admin = Factory(:user, :email => "admin@example.com", :admin => true)
-        test_sign_in(admin)
+        @admin = Factory(:user, :email => "admin@example.com", :admin => true)
+        test_sign_in(@admin)
       end
 
       it "should destroy the user" do
@@ -329,6 +347,12 @@ describe UsersController do
       it "should redirect to the users page" do
         delete :destroy, :id => @user
         response.should redirect_to(users_path)
+      end
+
+      it "should not permit to destroy oneself" do
+        lambda do
+          delete :destroy, :id => @admin
+        end.should_not change(User, :count)
       end
     end
   end
