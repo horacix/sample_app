@@ -1,4 +1,4 @@
-require 'spec/spec_helper'
+require 'spec_helper'
 
 describe "Users" do
 
@@ -60,3 +60,4 @@ describe "Users" do
     end
   end
 end
+

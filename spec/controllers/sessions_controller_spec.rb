@@ -1,4 +1,4 @@
-require 'spec/spec_helper'
+require 'spec_helper'
 
 describe SessionsController do
   render_views
@@ -70,3 +70,4 @@ describe SessionsController do
     end
   end
 end
+
