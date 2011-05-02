@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110412041642
+# Schema version: 20110501041216
 #
 # Table name: users
 #
@@ -12,6 +12,7 @@
 #  salt               :string(255)
 #  admin              :boolean
 #
+
 require 'digest'
 
 class User < ActiveRecord::Base
